@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>managementInterface</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+</head>
+<body>
+    <header>
+        <ul class="leftHeaderTop">
+            <li><a href="#">服务</a></li>
+            <li><a href="#">编辑</a></li>
+        </ul>
+        <ul class="rightHeaderTop">
+            <li><a href="#">smileShirely</a></li>
+            <li><a href="#">支持</a></li>
+        </ul>
+    </header>
+    <div id="info">
+        <div id="info_title">
+            <a type="button" id="new">新建队列</a>
+            <a href="#" id="operation">队列操作</a>
+            <ul>
+                <li><a href="#">添加信息</a></li>
+                <li><a href="#">删除信息</a></li>
+                <li><a href="#">修改信息</a></li>
+            </ul>
+        </div>
+        <table id="infoData">
+            <tr>
+                <th><a href="#"></a></th>
+                <th>名称</th>
+                <th>URL</th>
+                <th>可用消息</th>
+                <th>传输中的信息量</th>
+                <th>创建时间</th>
+            </tr>
+            <tr>
+                <td><a href="#"></a></td>
+                <td>cmy</td>
+                <td>https://github.com/smileShirely</td>
+                <td>4</td>
+                <td>6</td>
+                <td>2016-3-16</td>
+            </tr>
+        </table>
+    </div>
+    <form id="info_form" class="box_content">
+        <h2>新建队列</h2>
+        <p>名称:<br/>
+            <input id="name" type="text"/>
+        </p>
+        <p>URL:<br/>
+            <input id="URl" type="text"/>
+        </p>
+        <p>可用信息:<br/>
+            <input id="usable" type="text"/>
+        </p>
+        <p>传输中的消息:<br/>
+            <input id="transferInfo" type="text"/>
+        </p>
+        <p>创建的时间:<br/>
+            <input id="createTime" type="text"/>
+        </p>
+        <input type="submit" class="submit">
+    </form>
+    <footer></footer>
+<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
