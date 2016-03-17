@@ -69,39 +69,11 @@ $(function() {
 			}
 		]
 
-	};
-
-	/*显示table中的内容*/
-	$(function () {
-		$('#reportTable').bootstrapTable({
-			method: 'get',
-			cache: false,
-			height: 400,
-			striped: true,
-			pagination: true,
-			pageSize: 20,
-			pageNumber:1,
-			pageList: [10, 20, 50, 100, 200, 500],
-			search: true,
-			showColumns: true,
-			showRefresh: true,
-			showExport: true,
-			exportTypes: [],
-			search: true,
-			clickToSelect: true,
-			columns: [{field:"name",title:"名称",align:"center",valign:"middle",sortable:"true"},{field:"delay",title:"延迟消息",align:"center",valign:"middle",sortable:"true"},{field:"maxInfo",title:"最大消息大小",align:"center",valign:"middle",sortable:"true"},{field:"minInfo",title:"最小消息大小",align:"center",valign:"middle",sortable:"true"},{field:"sendNum",title:"发送信息的数量",align:"center",valign:"middle",sortable:"true"},{field:"receiveNum",title:"接收信息的数量",align:"center",valign:"middle",sortable:"true"},{field:"waitTime",title:"等待时间",align:"center",valign:"middle",sortable:"true"}],
-			data : [{"name":"ss","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"},{"name":"zz","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"}],
-		});
-
-		$(window).resize(function () {
-			$('#reportTable').bootstrapTable('resetView');
-		});
-	});
+	}
 	window.onload = function() {
 		var ctx = document.getElementById("canvas").getContext("2d");
 		window.myLine = new Chart(ctx).Line(lineChartData, {
 			responsive: true
 		});
-	};
-
+	}
 });

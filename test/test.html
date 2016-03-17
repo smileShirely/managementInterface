@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>练习</title>
+</head>
+<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+<style type="text/css">
+    #infoData {
+        width: 100%;
+        table-layout: fixed;/*能够改善表格呈现性能*/
+        empty-cells: show;/*能够隐藏不必要的干扰*/
+        border-collapse: collapse;/*能让表格看起来更精致*/
+        margin: 1.2rem auto 0 auto;
+        border: 1px solid #d7d7d7;
+        text-align: center;
+    }
+    #infoData th,td{
+        height: 2.2rem;
+        overflow: hidden;
+    }
+    #infoData th {
+        border: .1rem solid #f8f8f8;
+        background: #e5e5e5;
+    }
+    #infoData tr a:before {/*画出选择按钮td里面的小方块*/
+        content: "";
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        background: #feffeb;
+        border: .1rem solid #898c8a;
+        margin: 0 auto;
+    }
+</style>
+<body>
+<input type="button" value="增加">
+<table id="infoData">
+    <tr>
+        <th><a href="#"></a></th>
+        <th>名称</th>
+        <th>URL</th>
+        <th>可用消息</th>
+        <th>传输中的信息量</th>
+        <th>创建时间</th>
+    </tr>
+    <tr onclick="getIndex()">
+        <td><a href="#"></a></td>
+        <td>cmy</td>
+        <td>https://github.com/smileShirely</td>
+        <td>4</td>
+        <td>6</td>
+        <td>2016-3-16</td>
+    </tr>
+</table>
+<form id="info_form" name="info_form" class="box_content">
+    <h2>新建队列</h2>
+    <p>名称:<br/>
+        <input id="name" name="name" type="text"/>
+    </p>
+    <p>URL:<br/>
+        <input id="URl" name="URL" type="text"/>
+    </p>
+    <p>可用信息:<br/>
+        <input id="usable" name="usable" type="text"/>
+    </p>
+    <p>传输中的消息:<br/>
+        <input id="transferInfo" name="transferInfo" type="text"/>
+    </p>
+    <p>创建的时间:<br/>
+        <input id="createTime" name="createTime" type="text"/>
+    </p>
+    <input type="submit" class="submit" onclick="insertRow(intRowIndex)">
+</form>
+    <script type="text/javascript">
+        var intRowIndex = $('#infoData').rows.length;
+        function insertRow(tbIndex){
+            var objRow = infoData.insertRow(tbIndex);
+            var blank = objRow.insertCell(0);
+
+            var name = objRow.insertCell(1);
+            name.innerText = document.info_form.name.value;
+            var URL = objRow.insertCell(2);
+            URL.innerText = document.info_form.URL.value;
+            var usable = objRow.insertCell(3);
+            usable.innerText = document.info_form.usable.value;
+            var transferInfo = objRow.insertCell(4);
+            transferInfo.innerText = document.info_form.transferInfo.value;
+            var createTime = objRow.insertCell(5);
+            createTime.innerText = document.info_form.createTime.value;
+            objRow.attachEvent("onclick", getIndex);
+        }
+    </script>
+</body>
+</html>
