@@ -39,8 +39,10 @@ $(function() {
 			objRow.attachEvent("onclick", getIndex);
 		}
 	});
-
-
+	/* 拖动div */
+	$(function() {
+		$('.box').draggable();
+	});
 
 /*画图表*/
 	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
@@ -70,7 +72,12 @@ $(function() {
 		]
 
 	};
-
+	window.onload = function() {
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myLine = new Chart(ctx).Line(lineChartData, {
+			responsive: true
+		});
+	};
 	/*显示table中的内容*/
 	$(function () {
 		$('#reportTable').bootstrapTable({
@@ -89,19 +96,25 @@ $(function() {
 			exportTypes: [],
 			search: true,
 			clickToSelect: true,
-			columns: [{field:"name",title:"名称",align:"center",valign:"middle",sortable:"true"},{field:"delay",title:"延迟消息",align:"center",valign:"middle",sortable:"true"},{field:"maxInfo",title:"最大消息大小",align:"center",valign:"middle",sortable:"true"},{field:"minInfo",title:"最小消息大小",align:"center",valign:"middle",sortable:"true"},{field:"sendNum",title:"发送信息的数量",align:"center",valign:"middle",sortable:"true"},{field:"receiveNum",title:"接收信息的数量",align:"center",valign:"middle",sortable:"true"},{field:"waitTime",title:"等待时间",align:"center",valign:"middle",sortable:"true"}],
-			data : [{"name":"ss","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"},{"name":"zz","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"}],
+			columns: [{field:"name",title:"名称",align:"center",valign:"middle",sortable:"true"},
+				{field:"delay",title:"延迟消息",align:"center",valign:"middle",sortable:"true"},
+				{field:"maxInfo",title:"最大消息大小",align:"center",valign:"middle",sortable:"true"},
+				{field:"minInfo",title:"最小消息大小",align:"center",valign:"middle",sortable:"true"},
+				{field:"sendNum",title:"发送信息的数量",align:"center",valign:"middle",sortable:"true"},
+				{field:"receiveNum",title:"接收信息的数量",align:"center",valign:"middle",sortable:"true"},
+				{field:"waitTime",title:"等待时间",align:"center",valign:"middle",sortable:"true"}],
+			data : [{"name":"ss","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"},
+				{"name":"zz","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"},
+				{"name":"sz","delay":"5","maxInfo":"8","minInfo":"10","sendNum":"20","user_isv2":"21","receiveNum":"10","waitTime":"10"},
+				{"name":"ss","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"},
+				{"name":"hs","delay":"2","maxInfo":"24","minInfo":"30","sendNum":"70","user_isv2":"80","receiveNum":"10","waitTime":"90"}],
 		});
 
 		$(window).resize(function () {
 			$('#reportTable').bootstrapTable('resetView');
 		});
 	});
-	window.onload = function() {
-		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myLine = new Chart(ctx).Line(lineChartData, {
-			responsive: true
-		});
-	};
+
+
 
 });
