@@ -7,6 +7,7 @@ a {
 }
 a:hover {
     cursor: pointer;
+    text-decoration: none;
 }
 body {
     font-family:  Helvetica,Arial,sans-serif;
@@ -16,15 +17,21 @@ body {
 header {
     background: #000;
     height: 3rem;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
 }
 header ul {
     display: inline;
-    color: #ffe57b;
+    color: #d7dbc4;
 }
 header a {
     text-decoration: none;
     color: #fff;
+}
+header a:hover {
+    color: inherit;
+}
+header ul {
+    display: inline;
 }
 header ul li{
     display: inline;
@@ -34,11 +41,15 @@ header .leftHeaderTop {
     margin-left: 1rem;
 }
 header .rightHeaderTop {
-    margin-left: 80rem;
+    float: right;
+}
+header .rightHeaderTop li {
+    padding: 1rem;
 }
 /* 新建队列、队列操作*/
 #info_title {
-    margin-top: 1rem;
+    margin-top: 1.2rem;
+    margin-left: .5rem;
 }
 #info_title ul {
     display: none;
@@ -46,13 +57,22 @@ header .rightHeaderTop {
 #info_title a {
     position: relative;
     padding: .6rem;
-    background: #d7d7d7;
-    color: #000;
+    background: -moz-linear-gradient(top, #f1ffe7, #d7d5c1);
+    background: -webkit-linear-gradient(top, #f1ffe7, #d7d5c1);
+    color: #000000;
     font-weight: bold;
 }
-#info_title #new{
+#info_title a:hover {
+    background: #acacac;
+    color: #ffffff;
+}
+#info_title #new {
     background: #05138e;
     color: #fff;
+}
+#info_title #new:hover {
+    background: #3739d1;
+    color: #ffffff;
 }
 #info_title ul {
     margin-left: 10rem;
@@ -63,6 +83,9 @@ header .rightHeaderTop {
 #info_title ul li {
     padding-top: 1rem;
 }
+.form-group {
+    margin-right: 2rem;
+}
 #infoData {
     width: 100%;
     table-layout: fixed;/*能够改善表格呈现性能*/
@@ -70,17 +93,26 @@ header .rightHeaderTop {
     border-collapse: collapse;/*能让表格看起来更精致*/
     margin: 1.2rem auto 0 auto;
     border: 1px solid #d7d7d7;
+}
+#infoData thead {
     text-align: center;
 }
 #infoData th,td{
     height: 2.2rem;
     overflow: hidden;
+    text-align: center;
 }
 #infoData th {
-    border: .1rem solid #f8f8f8;
-    background: #e5e5e5;
+    border: .1rem solid #ddf8da;
+    background: -moz-linear-gradient(top, #f1ffe7, #d7d5c1);
+    background: -webkit-linear-gradient(top, #f1ffe7, #d7d5c1);
 }
-#infoData tr a:before {/*画出选择按钮td里面的小方块*/
+#infoData td {
+    border: .1rem solid #f1f1f1;
+    background: #fbf9ff;
+}
+
+#infoData .btnTh:before {/*画出选择按钮td里面的小方块*/
     content: "";
     display: block;
     width: 1rem;
@@ -93,41 +125,67 @@ header .rightHeaderTop {
 .box {
     position: fixed;
     z-index: 3;
-    margin-top: -20%;
     left: 60%;
+    top: 20%;
     margin-left: -20rem;
-    background: #f8f8f8;
-    border: .2rem solid #a5a5a5;
+    background: #ffffff;
+    border: .2rem solid #e8e8e8;
     display: none;
     font-size: .2rem;
+    border-radius: .4rem;
+    width: 25rem;
+    height: 20rem;
+    color: #7d7d7d;
 }
 .box h2 {
     text-align: center;
     border-bottom: .1rem solid #e0e0e0;
-    background: #e5e5e5;
-    width: 100%;
+    background: -moz-linear-gradient(top, #f1ffe7, #d7d5c1);
+    background: -webkit-linear-gradient(top, #f1ffe7, #d7d5c1);
     margin-top: -.1rem;
+    font-size: 2.2rem;
+    font-weight: bolder;
+    width: 25rem;
+    padding: .6rem;
+    color: #000;
+
 }
-.box p {
-    padding: 0 4rem;
+.box label{
+    padding: .1rem 2rem;
 }
-.box .submit {
+.box input {
     float: right;
-    margin-right: 2rem;
-    padding: .1rem;
+    margin-right: 1rem;
+}
+.box .btn {
+    margin: 2rem 3rem;
+    padding: .3rem;
+    background: -moz-linear-gradient(top, #f1ffe7, #d7d5c1);
+    background: -webkit-linear-gradient(top, #f1ffe7, #d7d5c1);
+    border-radius: .3rem;
+}
+.box .btn:hover {
+    background: #e3e3e3;
 }
 
 /* 详细信息介绍 */
 #infoChange {
+    margin: 0 2rem;
+}
+#infoChange > div{
     border: .2rem solid #dddddd;
-    border-top: none;
+    margin-top: .7rem;
 }
 #infoChange span {
-    background: #e6eae9;
+    background: -moz-linear-gradient(top, #f1ffe7, #d7d5c1);
+    background: -webkit-linear-gradient(top, #f1ffe7, #d7d5c1);
     color: #000;
     padding: .7rem;
     border: .2rem solid #dddddd;
     cursor: pointer;
+}
+#infoChange span:visited {
+    border-bottom: #fff;
 }
 #infoChange[id^="changeDiv"] {
     display: none;
@@ -136,7 +194,40 @@ header .rightHeaderTop {
     margin-top: .8rem;
     border: .2rem solid #dddddd;
 }
+#changeDiv_1 {
+    display: none;
+}
+#changeDiv_2 {
+    display: none;
+}
 .chart {
     width: 30%;
+}
+
+.results tr[visible='false'],
+.no-result{
+    display:none;
+}
+.results tr[visible='true']{
+    display:table-row;
+}
+
+/*详细信息部分*/
+#changeDiv_1 {
+    font-size: 1.6rem;
+    font-weight: bolder;
+    text-align: left;
+    padding-left: 2rem;
+}
+#changeDiv_1 ul {
+    list-style-type: none;
+}
+#changeDiv_1 p {
+    display: inline;
+    font-weight: 200;
+    font-size: 1.4rem;
+}
+.btn {
+    padding: 2rem;
 }
 

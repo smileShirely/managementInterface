@@ -4,117 +4,290 @@
 $(function() {
 	var opera = $('#operation');
 	var menu = $('#info ul');
-	var name = $('#name').value;
-	var URL = $('#URL').value;
-	var usable = $('#usable').value;
-	var transferInfo = $('#transferInfo').value;
-	var createTime = $('#createTime').value;
 	$(opera).click(function() {
 		$(menu).toggle();
 	});
-
+	//
 	//弹出新建队列的表单
 	$('#new').click(function() {
-		$('#info_form').css({'display':'block'});
+		$('#addForm').css({'display':'block'});
 	});
-	//提交后将表单元素添加到表格中去
-	$('#info_form .submit').click(function() {
-		$('#info_form').css({'display':'none'});
-		/*新建队列*/
-		var intRowIndex = $('#infoData').rows.length;
-		function insertRow(tbIndex){
-			var objRow = infoData.insertRow(tbIndex);
-			var blank = objRow.insertCell(0);
-
-			var name = objRow.insertCell(1);
-			name.innerText = document.info_form.name.value;
-			var URL = objRow.insertCell(2);
-			URL.innerText = document.info_form.URL.value;
-			var usable = objRow.insertCell(3);
-			usable.innerText = document.info_form.usable.value;
-			var transferInfo = objRow.insertCell(4);
-			transferInfo.innerText = document.info_form.transferInfo.value;
-			var createTime = objRow.insertCell(5);
-			createTime.innerText = document.info_form.createTime.value;
-			objRow.attachEvent("onclick", getIndex);
-		}
+  //添加
+	$('#add').click(function() {
+		 insertRow(infoData.rows.length);
 	});
-	/* 拖动div */
+	//取消
+	$('.cancel').click(function() {
+		$('#addForm').css({'display':'none'});
+	});
+	///* 拖动div */
 	$(function() {
 		$('.box').draggable();
 	});
 
-/*画图表*/
-	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-	var lineChartData = {
-		labels : ["","1","2","3","4","5","6"],
-		datasets : [
+/* 弹出查看信息的表单*/
+
+	$('#check').click(function() {
+		$('#infoForm').css({'display':'block'});
+	});
+
+	$('#close').click(function() {
+		$('#infoForm').css({'display':'none'});
+	});
+
+/* 弹出删除信息 */
+	$('#delete').click(function() {
+		$('#delForm').css({'display':'block'});
+	});
+
+	$('#del,.save').click(function() {
+		$('#delForm').css({'display':'none'});
+	});
+
+/*弹出修改信息*/
+	$('#change').click(function() {
+		$('#changeForm').css({'display':'block'});
+	});
+
+	$('#save, .cancel').click(function() {
+		$('#changeForm').css({'display':'none'});
+	});
+	/*图表*/
+	var myChart = echarts.init(document.getElementById('main'));
+	option1 = {
+		title : {
+			text : '统计数据图',
+		},
+		tooltip : {
+			trigger: 'item',
+			formatter : function (params) {
+				var date = new Date(params.value[0]);
+				data = date.getFullYear() + '-'
+					+ (date.getMonth() + 1) + '-'
+					+ date.getDate() + ' '
+					+ date.getHours() + ':'
+					+ date.getMinutes();
+				return data + '<br/>'
+					+ params.value[1] + ', '
+					+ params.value[2];
+			}
+		},
+		toolbox: {
+			show : true,
+			feature : {
+				mark : {show: true},
+				dataView : {show: true, readOnly: false},
+				restore : {show: true},
+				saveAsImage : {show: true}
+			}
+		},
+		dataZoom: {
+			show: true,
+			start : 70
+		},
+		legend : {
+			data : ['series1']
+		},
+		grid: {
+			y2: 80
+		},
+		xAxis : [
 			{
-				label: "My First dataset",
-				fillColor : "rgba(220,220,220,0.2)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
-				pointStrokeColor : "#fff",
-				pointHighlightFill : "#fff",
-				pointHighlightStroke : "rgba(220,220,220,1)",
-				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-			},
+				type : 'time',
+				splitNumber:10
+			}
+		],
+		yAxis : [
 			{
-				label: "My Second dataset",
-				fillColor : "rgba(151,187,205,0.2)",
-				strokeColor : "rgba(151,187,205,1)",
-				pointColor : "rgba(151,187,205,1)",
-				pointStrokeColor : "#fff",
-				pointHighlightFill : "#fff",
-				pointHighlightStroke : "rgba(151,187,205,1)",
-				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+				type : 'value'
+			}
+		],
+		series : [
+			{
+				name: '1',
+				type: 'line',
+				showAllSymbol: true,
+				symbolSize: function (value){
+					return Math.round(value[2]/10) + 2;
+				},
+				data: (function () {
+					var d = [];
+					var len = 0;
+					var now = new Date();
+					var value;
+					while (len++ < 200) {
+						d.push([
+							new Date(2014, 9, 1, 0, len * 3800),
+							(Math.random()*30).toFixed(2) - 0,
+							(Math.random()*100).toFixed(2) - 0
+						]);
+					}
+					return d;
+				})()
 			}
 		]
-
 	};
-	window.onload = function() {
-		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myLine = new Chart(ctx).Line(lineChartData, {
-			responsive: true
-		});
+	option2 = {
+		title : {
+			text : '统计数据图',
+		},
+		tooltip : {
+			trigger: 'item',
+			formatter : function (params) {
+				var date = new Date(params.value[0]);
+				data = date.getFullYear() + '-'
+					+ (date.getMonth() + 1) + '-'
+					+ date.getDate() + ' '
+					+ date.getHours() + ':'
+					+ date.getMinutes();
+				return data + '<br/>'
+					+ params.value[1] + ', '
+					+ params.value[2];
+			}
+		},
+		toolbox: {
+			show : true,
+			feature : {
+				mark : {show: true},
+				dataView : {show: true, readOnly: false},
+				restore : {show: true},
+				saveAsImage : {show: true}
+			}
+		},
+		dataZoom: {
+			show: true,
+			start : 70
+		},
+		legend : {
+			data : ['series1']
+		},
+		grid: {
+			y2: 80
+		},
+		xAxis : [
+			{
+				type : 'time',
+				splitNumber:10
+			}
+		],
+		yAxis : [
+			{
+				type : 'value'
+			}
+		],
+		series : [
+			{
+				name: '1',
+				type: 'line',
+				showAllSymbol: true,
+				symbolSize: function (value){
+					return Math.round(value[2]/10) + 2;
+				},
+				data: (function () {
+					var d = [];
+					var len = 0;
+					var now = new Date();
+					var value;
+					while (len++ < 200) {
+						d.push([
+							new Date(2014, 9, 1, 0, len * 3800),
+							(Math.random()*40).toFixed(2) - 0,
+							(Math.random()*100).toFixed(2) - 0
+						]);
+					}
+					return d;
+				})()
+			}
+		]
 	};
-	/*显示table中的内容*/
-	$(function () {
-		$('#reportTable').bootstrapTable({
-			method: 'get',
-			cache: false,
-			height: 400,
-			striped: true,
-			pagination: true,
-			pageSize: 20,
-			pageNumber:1,
-			pageList: [10, 20, 50, 100, 200, 500],
-			search: true,
-			showColumns: true,
-			showRefresh: true,
-			showExport: true,
-			exportTypes: [],
-			search: true,
-			clickToSelect: true,
-			columns: [{field:"name",title:"名称",align:"center",valign:"middle",sortable:"true"},
-				{field:"delay",title:"延迟消息",align:"center",valign:"middle",sortable:"true"},
-				{field:"maxInfo",title:"最大消息大小",align:"center",valign:"middle",sortable:"true"},
-				{field:"minInfo",title:"最小消息大小",align:"center",valign:"middle",sortable:"true"},
-				{field:"sendNum",title:"发送信息的数量",align:"center",valign:"middle",sortable:"true"},
-				{field:"receiveNum",title:"接收信息的数量",align:"center",valign:"middle",sortable:"true"},
-				{field:"waitTime",title:"等待时间",align:"center",valign:"middle",sortable:"true"}],
-			data : [{"name":"ss","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"},
-				{"name":"zz","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"},
-				{"name":"sz","delay":"5","maxInfo":"8","minInfo":"10","sendNum":"20","user_isv2":"21","receiveNum":"10","waitTime":"10"},
-				{"name":"ss","delay":"3","maxInfo":"4","minInfo":"0","sendNum":"0","user_isv2":"0","receiveNum":"0","waitTime":"10"},
-				{"name":"hs","delay":"2","maxInfo":"24","minInfo":"30","sendNum":"70","user_isv2":"80","receiveNum":"10","waitTime":"90"}],
-		});
 
-		$(window).resize(function () {
-			$('#reportTable').bootstrapTable('resetView');
+	myChart.setOption(option1);
+	/*var table = $('infoData');
+	table.addEventListener("click", function() {
+		myChart.setOption(option2);
+		myChart.setOption(option1);
+	},false);
+*/
+	/*搜索框中的内容*/
+	$(document).ready(function() {
+		$(".search").keyup(function () {
+			var searchTerm = $(".search").val();
+			var listItem = $('.results tbody').children('tr');
+			var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+
+			$.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+				return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+			}
+			});
+
+			$(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+				$(this).attr('visible','false');
+			});
+
+			$(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+				$(this).attr('visible','true');
+			});
+
+			var jobCount = $('.results tbody tr[visible="true"]').length;
+			$('.counter').text(jobCount + ' item');
+
+			if(jobCount == '0') {$('.no-result').show();}
+			else {$('.no-result').hide();}
 		});
 	});
 
+	/*添加数据*/
+	var intRowIndex = 0;
+	function insertRow(tbIndex) {
+		var objRow = document.getElementById('infoData').insertRow(tbIndex);
+		var objCel = objRow.insertCell(0);
+		objCel.innerHTML = '<a href="#"><input type="checkbox"></a>';
+		var objCel = objRow.insertCell(1);
+		objCel.innerText = document.addForm.myCell1.value;
+		var objCel = objRow.insertCell(2);
+		objCel.innerText = document.addForm.myCell2.value;
+		var objCel = objRow.insertCell(3);
+		objCel.innerText = document.addForm.myCell3.value;
+		var objCel = objRow.insertCell(4);
+		objCel.innerText = document.addForm.myCell4.value;
+		var objCel = objRow.insertCell(5);
+		objCel.innerText = document.addForm.myCell15.value;
+		var objCel = objRow.insertCell(6);
+		objCel.innerHTML = "<a  onclick='javascript:deletRow(this);'></a>";
+		objRow.attachEvent("onclick", getIndex);
+	}
+	/* 获取信息*/
+	function trContent(table) {;
+		var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+		var rowNum = td.parentElement.rowIndex;//tr的行数
+		var tableRow = document.getElementById('table').rows[rowNum];
+		for ( var n=1; n<= 5; n++) {
+			tableRow.cells[n].innerText = document.infoForm.myCell+n.value;
+		}
+	}
+	function deletRow(tbIndex) {
+		var Row = tbIndex.parentNode;
+		while (Row.tagName.toLowerCase()!="tr")
+		{
+			Row = Row.parentNode;
+		}
+		Row.parentNode.removeChild(Row);
+	}
 
+	function getIndex(tbIndex) {
+		intRowIndex = event.srcElement.parentElement.rowIndex;
+		pos.innerText = intRowIndex;
+	}
 
+	function closeDiv() {
+		document.getElementById('popDiv').style.display="none";
+		document.getElementById('affirmClose-bg').style.display="none";
+	}
+//获取table中的行号和内容
+	function doclick() {
+		var td = event.srcElement.parentElement; // 通过event.srcElement 获取激活事件的对象 td
+		var rowNum = td.parentElement.rowIndex;
+		return rowNum;
+		/*alert("行号：" + (td.parentElement.rowIndex) + "，内容：" + td.innerText);*/
+	}
 });

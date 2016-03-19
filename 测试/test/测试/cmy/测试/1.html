@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script language="javascript">
+        function doclick()
+        {
+            var td = event.srcElement; // 通过event.srcElement 获取激活事件的对象 td
+            var rowNum = td.parentElement.rowIndex;
+	        alert(rowNum);
+        }
+        var s = doclick();
+        document.getElementById("demo").innerHTML= s;
+    </script>
+</head>
+<body>
+<p id="demo">ret</p>
+<table id="infoData" class="table table-hover table-bordered results tablesaw"  data-tablesaw-mode="columntoggle">
+    <thead>
+    <tr>
+        <th><a class="btnTh" href="#"></a></th>
+        <th data-tablesaw-priority="5">名称</th>
+        <th data-tablesaw-priority="3">URL</th>
+        <th data-tablesaw-priority="2">可用消息</th>
+        <th data-tablesaw-priority="1">传输中的信息量</th>
+        <th data-tablesaw-priority="4">创建时间</th>
+    </tr>
+    <tr class="warning no-result">
+        <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr onclick="getIndex">
+        <td onclick="doclick()"></td>
+        <td>cmy</td>
+        <td>https://github.com/smileShirely</td>
+        <td>6</td>
+        <td>6</td>
+        <td>2016-3-16</td>
+    </tr>
+    <tr onclick="getIndex">
+        <td><a href="#"><input type="checkbox"/></a></td>
+        <td>sy</td>
+        <td>https://github.com/smileShirely</td>
+        <td>8</td>
+        <td>6</td>
+        <td>2016-3-16</td>
+    </tr>
+    <tr onclick="getIndex">
+        <td><a href="#"><input type="checkbox"></a></td>
+        <td>hkg</td>
+        <td>https://github.com/smileShirely</td>
+        <td>4</td>
+        <td>27</td>
+        <td>2016-3-16</td>
+    </tr>
+    <tr onclick="getIndex">
+        <td><a href="#"><input type="checkbox"></a></td>
+        <td>sah</td>
+        <td>https://github.com/smileShirely</td>
+        <td>4</td>
+        <td>6</td>
+        <td>2016-3-16</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
