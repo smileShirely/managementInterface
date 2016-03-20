@@ -4,18 +4,20 @@
 var intRowIndex = 0;
 function insertRow(tbIndex) {
 	var objRow = document.getElementById('infoData').insertRow(tbIndex);
-	var objCel1 = objRow.insertCell(0);
-	objCel1.innerHTML = '<a href="#"><input type="checkbox"></a>';
-	var objCel2 = objRow.insertCell(1);
-	objCel2.innerText = document.addForm.myCell1.value;
-	var objCel3 = objRow.insertCell(2);
-	objCel3.innerText = document.addForm.myCell2.value;
-	var objCel4 = objRow.insertCell(3);
-	objCel4.innerText = document.addForm.myCell3.value;
-	var objCel5 = objRow.insertCell(4);
-	objCel5.innerText = document.addForm.myCell4.value;
-	var objCel6 = objRow.insertCell(5);
-	objCel6.innerText = document.addForm.myCell15.value;
+	var objCel = objRow.insertCell(0);
+	objCel.innerHTML = '<a href="#"><input type="checkbox"></a>';
+	var objCel = objRow.insertCell(1);
+	objCel.innerText = document.addForm.myCell1.value;
+	var objCel = objRow.insertCell(2);
+	objCel.innerText = document.addForm.myCell2.value;
+	var objCel = objRow.insertCell(3);
+	objCel.innerText = document.addForm.myCell3.value;
+	var objCel = objRow.insertCell(4);
+	objCel.innerText = document.addForm.myCell4.value;
+	var objCel = objRow.insertCell(5);
+	objCel.innerText = document.addForm.myCell15.value;
+	var objCel = objRow.insertCell(6);
+	objCel.innerHTML = "<a  onclick='javascript:deletRow(this);'></a>";
 	objRow.attachEvent("onclick", getIndex);
 }
 /* 获取信息*/
