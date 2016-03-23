@@ -87,17 +87,17 @@ header .rightHeaderTop li {
 #error {
     display: none;
     position: fixed;
-    z-index: 3;
-    left: 30%;
+    z-index: 999;
+    left: 30em;
     top: 10%;
     margin-left: -20rem;
-    background: #000000;
+    background: #fbfbfb;
     border: .2rem solid #ff090f;
     font-size: .2rem;
     border-radius: .4rem;
     height: 5rem;
     width: 16rem;
-    color: #ededed;
+    color: #000000;
 }
 #error p {
     text-align: center;
