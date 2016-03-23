@@ -29,6 +29,10 @@
             <li><a href="#" id="change">修改信息</a></li>
         </ul>
     </div>
+    <div id="error">
+        <P>没有选中复选框哦</P>
+        <input id="answer"  type="button" value="知道了">
+    </div>
     <div class="form-group pull-right">
         <input type="text" class="search form-control" placeholder="search">
     </div>
@@ -39,45 +43,44 @@
             <tr>
                 <th ><a class="btnTh" href="#"></a></th>
                 <th data-tablesaw-priority="5">名称</th>
-                <th data-tablesaw-priority="3">URL</th>
+                <th data-tablesaw-priority="3">信息总数</th>
                 <th data-tablesaw-priority="2">可用消息</th>
                 <th data-tablesaw-priority="1">传输中的信息量</th>
-                <th data-tablesaw-priority="4">创建时间</th>
                 <th data-tablesaw-priority="4">创建时间</th>
             </tr>
             <tr class="warning no-result">
                 <td colspan="6"><i class="fa fa-warning"></i> No result</td>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tBody">
                 <tr onclick="getIndex">
-                    <td onclick="doclick()"><a href="#"><input type="checkbox" id="s"  ></a></td>
+                    <td onclick="getChecked()"><input type="checkbox"  name="checks"></td>
                     <td>cmy</td>
-                    <td>https://github.com/smileShirely</td>
+                    <td>4</td>
                     <td>6</td>
                     <td>6</td>
                     <td>2016-3-16</td>
                 </tr>
                 <tr onclick="getIndex">
-                    <td><a href="#"><input type="checkbox"/></a></td>
+                    <td onclick="getChecked()"><input type="checkbox" name="checks"/></td>
                     <td>sy</td>
-                    <td>https://github.com/smileShirely</td>
+                    <td>4</td>
                     <td>8</td>
                     <td>6</td>
                     <td>2016-3-16</td>
                 </tr>
                 <tr onclick="getIndex">
-                    <td><a href="#"><input type="checkbox"></a></td>
+                    <td onclick="getChecked()"><input type="checkbox" name="checks"/></td>
                     <td>hkg</td>
-                    <td>https://github.com/smileShirely</td>
+                    <td>4</td>
                     <td>4</td>
                     <td>27</td>
                     <td>2016-3-16</td>
                 </tr>
                 <tr onclick="getIndex">
-                    <td><a href="#"><input type="checkbox"></a></td>
+                    <td onclick="getChecked()"><input type="checkbox" name="checks"/></td>
                     <td>sah</td>
-                    <td>https://github.com/smileShirely</td>
+                    <td>4</td>
                     <td>4</td>
                     <td>6</td>
                     <td>2016-3-16</td>
@@ -86,24 +89,24 @@
         </table>
     </form>
 </div>
-</div>
 <!--新建队列-->
 <form name="addForm"  id="addForm" class="box">
     <h2>新建队列</h2>
     <label for="myCell1">名称：</label>
     <input type="text" id="myCell1" name="myCell1"/><br/>
 
-    <label for="myCell2">URL：</label>
+    <label for="myCell2">信息总数：</label>
     <input type="text" id="myCell2" name="myCell2"/><br/>
 
     <label for="myCell3">传输中的消息:</label>
-    <input type="text" id="myCell3" name="myCell3"/><br/>
+    <input type="text" id="myCell3" name="myCell3" /><br/>
 
     <label for="myCell4">可用信息:</label>
     <input type="text" id="myCell4" name="myCell4"/><br/>
 
     <label for="myCell5">创建的时间:</label>
     <input type="text" id="myCell5" name="myCell5"/><br/>
+
     <input id="cancel" class="sub btn cancel" type="button" value="取消">
     <input id="add" class="sub btn" type="button" value="添加"/>
 </form>
@@ -111,40 +114,40 @@
 <form name="infoForm"  id="infoForm" class="box">
     <h2>查看队列</h2>
     <label for="myCell1">名称：</label>
-    <input type="text" id="info1" name="myCell1"/><br/>
+    <input type="text" id="info1" name="myCell1" readonly/><br/>
 
-    <label for="myCell2">URL：</label>
-    <input type="text" id="info2" name="myCell2"/><br/>
+    <label for="myCell2">信息总数：</label>
+    <input type="text" id="info2" name="myCell2" readonly/><br/>
 
     <label for="myCell3">传输中的消息:</label>
-    <input type="text" id="info3" name="myCell3"/><br/>
+    <input type="text" id="info3" name="myCell3" readonly/><br/>
 
     <label for="myCell4">可用信息:</label>
-    <input type="text" id="info4" name="myCell4"/><br/>
+    <input type="text" id="info4" name="myCell4" readonly/><br/>
 
     <label for="myCell5">创建的时间:</label>
-    <input type="text" id="info5" name="myCell5"/><br/>
-    <input id="close" class="sub btn cancel" type="button" value="取消">
+    <input type="text" id="info5" name="myCell5" readonly/><br/>
+    <input id="close" class="sub btn cancel" type="button" value="取消"/>
 </form>
 <!--删除信息-->
 <form name="delForm"  id="delForm" class="box">
     <h2>删除信息</h2>
     <label for="myCell1">名称：</label>
-    <input type="text" id="del1" name="myCell1"/><br/>
+    <input type="text" id="del1" name="myCell1" readonly/><br/>
 
-    <label for="myCell2">URL：</label>
-    <input type="text" id="del2" name="myCell2"/><br/>
+    <label for="myCell2">信息总数：</label>
+    <input type="text" id="del2" name="myCell2" readonly/><br/>
 
     <label for="myCell3">传输中的消息:</label>
-    <input type="text" id="del3" name="myCell3"/><br/>
+    <input type="text" id="del3" name="myCell3" readonly/><br/>
 
     <label for="myCell4">可用信息:</label>
-    <input type="text" id="del4" name="myCell4"/><br/>
+    <input type="text" id="del4" name="myCell4" readonly/><br/>
 
     <label for="myCell5">创建的时间:</label>
-    <input type="text" id="del5" name="myCell5"/><br/>
-    <input id="save" class="sub btn save " type="button" value="保存">
-    <input id="del" class="sub btn" type="button" value="取消">
+    <input type="text" id="del5" name="myCell5" readonly/><br/>
+    <input id="save" class="sub btn save " type="button" value="取消">
+    <input id="del" class="sub btn" type="button" value="删除">
 </form>
 <!--修改信息-->
 <form name="infoForm"  id="changeForm" class="box">
@@ -152,7 +155,7 @@
     <label for="myCell1">名称：</label>
     <input type="text" id="change1" name="myCell1"/><br/>
 
-    <label for="myCell2">URL：</label>
+    <label for="myCell2">信息总数：</label>
     <input type="text" id="change2" name="myCell2"/><br/>
 
     <label for="myCell3">传输中的消息:</label>
@@ -163,8 +166,8 @@
 
     <label for="myCell5">创建的时间:</label>
     <input type="text" id="change5" name="myCell5"/><br/>
-    <input id="save2" class="sub btn" type="button" value="保存">
-    <input class="sub btn" type="button" value="取消">
+    <input class="cancel btn" type="button" value="取消">
+    <input id="save2" class=" btn" type="button" value="保存">
 </form>
 <hr/>
 <div id="infoChange">
@@ -178,7 +181,7 @@
         <div id="changeDiv_1">
             <ul>
                 <li>名称：<p>sss</p></li>
-                <li>URL:<P>http://www.cnphp6.com/archives/95846</P></li>
+                <li>信息总数:<P>4</P></li>
                 <li>传输中的时间：<p>332</p></li>
                 <li>可用信息:<P>2565</P></li>
                 <li>创建的时间：<p>2015</p></li>
