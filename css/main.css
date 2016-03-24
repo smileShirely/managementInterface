@@ -1,7 +1,49 @@
-* {
+/*CSS重置*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
     padding: 0;
-    margin:0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/*重置部分结束*/
+
 a {
     text-decoration: none;
 }
@@ -16,8 +58,8 @@ body {
 }
 header {
     background: #000;
-    height: 3rem;
-    font-size: 2.2rem;
+    height: 2rem;
+    font-size: 1.4rem;
 }
 header ul {
     display: inline;
@@ -95,13 +137,14 @@ header .rightHeaderTop li {
     border: .2rem solid #ff090f;
     font-size: .2rem;
     border-radius: .4rem;
-    height: 5rem;
+    height: 4rem;
     width: 16rem;
     color: #000000;
 }
 #error p {
     text-align: center;
-    font-size: 2rem;
+    font-size: 1rem;
+    padding-top: .3rem;
 }
 #error input {
     background: #fff;
@@ -116,6 +159,7 @@ header .rightHeaderTop li {
 .form-group {
     margin-right: 2rem;
 }
+/*数据表格*/
 #infoData {
     width: 100%;
     table-layout: fixed;/*能够改善表格呈现性能*/
@@ -145,8 +189,8 @@ header .rightHeaderTop li {
 #infoData .btnTh:before {/*画出选择按钮td里面的小方块*/
     content: "";
     display: block;
-    width: 1rem;
-    height: 1rem;
+    width: .9rem;
+    height: .9rem;
     background: #feffeb;
     border: .1rem solid #898c8a;
     margin: 0 auto;
@@ -164,8 +208,9 @@ header .rightHeaderTop li {
     font-size: .2rem;
     border-radius: .4rem;
     width: 25rem;
-    height: 20rem;
+    height: 16rem;
     color: #7d7d7d;
+    text-align: center;
 }
 .box h2 {
     text-align: center;
@@ -173,7 +218,7 @@ header .rightHeaderTop li {
     background: -moz-linear-gradient(top, #f1ffe7, #d7d5c1);
     background: -webkit-linear-gradient(top, #f1ffe7, #d7d5c1);
     margin-top: -.1rem;
-    font-size: 2.2rem;
+    font-size: 1.2rem;
     font-weight: bolder;
     width: 25rem;
     padding: .6rem;
@@ -181,14 +226,16 @@ header .rightHeaderTop li {
 
 }
 .box label{
-    padding: .1rem 2rem;
+    float: left;
+    width: 10rem;
+    text-align: right;
+    margin-top: .6rem;
 }
 .box input {
-    float: right;
-    margin-right: 1rem;
+    margin: .4rem 2rem;
 }
 .box .btn {
-    margin: 2rem 3rem;
+    margin: 1rem 2rem 1rem 1rem;
     padding: .3rem;
     background: -moz-linear-gradient(top, #f1ffe7, #d7d5c1);
     background: -webkit-linear-gradient(top, #f1ffe7, #d7d5c1);
@@ -197,7 +244,9 @@ header .rightHeaderTop li {
 .box .btn:hover {
     background: #e3e3e3;
 }
-
+#inputBtn {
+    padding-left: 2rem;
+}
 /* 详细信息介绍 */
 #infoChange {
     margin: 0 2rem;
@@ -244,13 +293,16 @@ header .rightHeaderTop li {
 
 /*详细信息部分*/
 #changeDiv_1 {
-    font-size: 1.6rem;
+    font-size: 1rem;
     font-weight: bolder;
     text-align: left;
     padding-left: 2rem;
 }
 #changeDiv_1 ul {
     list-style-type: none;
+}
+#changeDiv_1 ul li {
+    padding: .5rem;
 }
 #changeDiv_1 p {
     display: inline;

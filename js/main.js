@@ -21,10 +21,11 @@ $(function() {
 	});
   //添加
 	$('#add').click(function() {
-		 insertRow(infoData.rows.length);
+		$('#addForm').css({'display':'none'});
+		insertRow(infoData.rows.length);
 	});
 	//取消
-	$('#cancel,#add').click(function() {
+	$('#cancel').click(function() {
 		$('#addForm').css({'display':'none'});
 	});
 	///* 拖动弹出的表单*/
@@ -44,7 +45,6 @@ $(function() {
 	$('#close').click(function() {
 		$('#infoForm').css({'display':'none'});
 	});
-
 /* 弹出删除信息 */
 	$('#delete').click(function() {
 		$(menu).toggle();
