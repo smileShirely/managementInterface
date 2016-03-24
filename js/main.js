@@ -5,10 +5,10 @@ $(function() {
 	var opera = $('#operation');
 	var menu = $('#info ul');
 	$(opera).click(function() {
-		if (rowIndex == null) {
+		if (currentIndex == null) {//如果没有复选框被选中就弹出错误提示框
 			$('#error').css({'display':'block'});
 		} else {
-			$(menu).toggle();
+			$(menu).toggle();//展开队列操作的列表
 		}
 	});
 	//关闭错误提示框
@@ -27,21 +27,19 @@ $(function() {
 	$('#cancel,#add').click(function() {
 		$('#addForm').css({'display':'none'});
 	});
-	///* 拖动div */
+	///* 拖动弹出的表单*/
 	$(function() {
 		$('.box').draggable();
 	});
 
 /* 弹出查看信息的表单*/
-
 	$('#check').click(function() {
 		$(menu).toggle();
 		$('#infoForm').css({'display':'block'});
 		var infoForm = document.getElementById('infoForm');
 		for (var i = 0; i <= 4; i++) {
-			infoForm.elements[i].value = table.rows[rowIndex].cells[i+1].innerText;
+			infoForm.elements[i].value = table.rows[currentIndex].cells[i+1].innerText;
 		}
-
 	});
 	$('#close').click(function() {
 		$('#infoForm').css({'display':'none'});
@@ -53,7 +51,7 @@ $(function() {
 		$('#delForm').css({'display':'block'});
 		var delForm = document.getElementById('delForm');
 		for (var i = 0; i <= 4; i++) {
-			delForm.elements[i].value = table.rows[rowIndex].cells[i+1].innerText;
+			delForm.elements[i].value = table.rows[currentIndex].cells[i+1].innerText;
 		}
 	});
 
@@ -62,7 +60,7 @@ $(function() {
 	});
 	$('#del').click(function() {
 		$('#delForm').css({'display':'none'});
-		table.deleteRow(rowIndex);
+		table.deleteRow(currentIndex);
 	});
 
 /*弹出修改信息*/
@@ -71,7 +69,7 @@ $(function() {
 		$('#changeForm').css({'display':'block'});
 		var changeForm = document.getElementById('changeForm');
 		for (var i = 0; i <= 4; i++) {
-			changeForm.elements[i].value = table.rows[rowIndex].cells[i+1].innerText;
+			changeForm.elements[i].value = table.rows[currentIndex].cells[i+1].innerText;
 		}
 	});
 
@@ -81,10 +79,10 @@ $(function() {
 	$('#save2').click(function() {
 		var changeForm = document.getElementById('changeForm');
 		for (var i = 0; i <= 4; i++) {
-			table.rows[rowIndex].cells[i+1].innerText = changeForm.elements[i].value;
+			table.rows[currentIndex].cells[i+1].innerText = changeForm.elements[i].value;
 		}
 	});
-	/*图表*/
+	/*图表，页面加载完成就出现*/
 	var myChart = echarts.init(document.getElementById('main'));
 	option1 = {
 		title : {
@@ -118,7 +116,7 @@ $(function() {
 			start : 70
 		},
 		legend : {
-			data : ['1']
+			data : []
 		},
 		grid: {
 			y2: 80
@@ -145,42 +143,7 @@ $(function() {
 			}
 		]
 	};
-
 	myChart.setOption(option1);
-
-	/*点击增加*/
-	/*for (i =0, len=checkboxs.length; i<len;i++) {
-		console.log(i);
-			checkboxs[i].addEventListener("click",function() {
-				console.log(i);
-					option1.legend.data[i+1]= i.toString();
-					option1.series[1+i]={
-						name: i.toString(),
-						type: 'line',
-						showAllSymbol: true,
-						symbolSize: function (value){
-							return Math.round(value[2]/10) + 2;
-						},
-						data: (function () {
-							var d = [];
-							var len = 0;
-							var now = new Date();
-							var value;
-							while (len++ < 200) {
-								d.push([
-									new Date(2016, 1, 1, 0, len * 1000),
-									(Math.random()*200).toFixed(2) - 0,
-									(Math.random()*100).toFixed(2) - 0
-								]);
-							}
-							return d;
-						})()
-					};
-					myChart.setOption(option1);
-			},false);
-	}*/
-
-
 
 	/*搜索框中的内容*/
 	$(document).ready(function() {
