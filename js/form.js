@@ -8,8 +8,8 @@ var currentIndex;
 var current;
 //在表格底部再插入一行
 function insertRow(tbIndex) {
-	var objRow = document.getElementById('infoData').insertRow(tbIndex);
-	table.appendChild(objRow);
+	var objRow = document.getElementById('tBody').insertRow(tbIndex);
+	tbody.appendChild(objRow);
 	var objCel1 = objRow.insertCell(0);
 	objCel1.innerHTML = '<input type="checkbox" name="checks" onclick="getChecked()">';
 	var objCel2 = objRow.insertCell(1);
@@ -22,7 +22,7 @@ function insertRow(tbIndex) {
 	objCel5.innerText = document.addForm.myCell4.value;
 	var objCel6 = objRow.insertCell(5);
 	objCel6.innerText = document.addForm.myCell5.value;
-	objRow.addEventListener("click", getIndex, false);
+	/*objRow.addEventListener("load", save, false);*/
 
 	$( document ).on( "tablesawcreate", function( e, Tablesaw, colstart ){
 		if( Tablesaw.mode === 'stack' ){
@@ -78,9 +78,130 @@ function getChecked() {
 		myChart.setOption(option1);
 		currentIndex = null;//将当前的行号索引标记
 	}
-
 }
 
+/*localStorage*/
+if(!localStorage.getItem('test')) {
+	populateStorage();
+} else {
+	setStyles();
+}
+
+function populateStorage() {
+	localStorage.setItem('td', document.getElementById('test').value);
+
+	setStyles();
+}
+
+function setStyles() {
+	var currentTd = localStorage.getItem('test');
+
+	document.getElementById('test').value = currentTd;
+	test.vaue = currentTd;
+}
+tbody.onchange = populateStorage;
+//保存数据
+var dataInfo = new Array();
+function save() {
+	for (var i=0, len=tbody.rows.length; i<len; i++) {
+		for (var n=1; n<=5; n++) {
+			var elementArray = tbody.rows[i].cells[n].innerText;
+			dataInfo.push(elementArray);
+		}
+	}
+}
+
+
+var opera = $('#operation');
+var menu = $('#info ul');
+$(opera).click(function() {
+	if (currentIndex == null) {//如果没有复选框被选中就弹出错误提示框
+		$('#error').css({'display':'block'});
+	} else {
+		$(menu).toggle();//展开队列操作的列表
+	}
+});
+//关闭错误提示框
+$('#answer').click(function() {
+	$('#error').css({'display':'none'});
+});
+//弹出新建队列的表单
+$('#new').click(function() {
+	$('#addForm').css({'display':'block'});
+});
+//添加
+$('#add').click(function() {
+	$('#addForm').css({'display':'none'});
+	insertRow(tbody.rows.length);
+	save();
+	console.log(dataInfo);
+});
+//取消
+$('#cancel').click(function() {
+	$('#addForm').css({'display':'none'});
+});
+///* 拖动弹出的表单*/
+$(function() {
+	$('.box').draggable();
+});
+
+/* 弹出查看信息的表单*/
+$('#check').click(function() {
+	$(menu).toggle();
+	$('#infoForm').css({'display':'block'});
+	var infoForm = document.getElementById('infoForm');
+	for (var i = 0; i <= 4; i++) {
+		infoForm.elements[i].value = table.rows[currentIndex].cells[i+1].innerText;
+	}
+});
+$('#close').click(function() {
+	$('#infoForm').css({'display':'none'});
+});
+/* 弹出删除信息 */
+$('#delete').click(function() {
+	$(menu).toggle();
+	$('#delForm').css({'display':'block'});
+	var delForm = document.getElementById('delForm');
+	for (var i = 0; i <= 4; i++) {
+		delForm.elements[i].value = table.rows[currentIndex].cells[i+1].innerText;
+	}
+	option1.legend.data.splice(currentIndex-2, 1);
+	option1.series.splice(currentIndex-2, 1);
+});
+
+$('#save,#del').click(function() {
+	$('#delForm').css({'display':'none'});
+});
+$('#del').click(function() {
+	var myChart = echarts.init(document.getElementById('main'));
+	$('#delForm').css({'display':'none'});
+	table.deleteRow(currentIndex);
+	save();
+	console.log(dataInfo);
+	myChart.setOption(option1);
+});
+
+/*弹出修改信息*/
+$('#change').click(function() {
+	$(menu).toggle();
+	$('#changeForm').css({'display':'block'});
+	var changeForm = document.getElementById('changeForm');
+	for (var i = 0; i <= 4; i++) {
+		changeForm.elements[i].value = table.rows[currentIndex].cells[i+1].innerText;
+	}
+});
+
+$('#save2,.cancel').click(function() {
+	$('#changeForm').css({'display':'none'});
+});
+$('#save2').click(function() {
+	var changeForm = document.getElementById('changeForm');
+	for (var i = 0; i <= 4; i++) {
+		table.rows[currentIndex].cells[i+1].innerText = changeForm.elements[i].value;
+	}
+	save();
+	console.log(dataInfo);
+});
 
 
 
