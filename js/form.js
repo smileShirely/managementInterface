@@ -4,8 +4,12 @@
 
 var tbody = document.getElementById('tBody');
 var table = document.getElementById("infoData");
-var currentIndex;
+var currentIndex;//当前的索引
 var current;
+var opera = $('#operation');
+var menu = $('#info ul');
+var formInput = $('.box input');
+
 //在表格底部再插入一行
 function insertRow(tbIndex) {
 	var objRow = document.getElementById('tBody').insertRow(tbIndex);
@@ -80,40 +84,9 @@ function getChecked() {
 	}
 }
 
-/*localStorage*/
-if(!localStorage.getItem('test')) {
-	populateStorage();
-} else {
-	setStyles();
-}
-
-function populateStorage() {
-	localStorage.setItem('td', document.getElementById('test').value);
-
-	setStyles();
-}
-
-function setStyles() {
-	var currentTd = localStorage.getItem('test');
-
-	document.getElementById('test').value = currentTd;
-	test.vaue = currentTd;
-}
-tbody.onchange = populateStorage;
-//保存数据
-var dataInfo = new Array();
-function save() {
-	for (var i=0, len=tbody.rows.length; i<len; i++) {
-		for (var n=1; n<=5; n++) {
-			var elementArray = tbody.rows[i].cells[n].innerText;
-			dataInfo.push(elementArray);
-		}
-	}
-}
 
 
-var opera = $('#operation');
-var menu = $('#info ul');
+/*弹出队列操作列表*/
 $(opera).click(function() {
 	if (currentIndex == null) {//如果没有复选框被选中就弹出错误提示框
 		$('#error').css({'display':'block'});
@@ -125,17 +98,58 @@ $(opera).click(function() {
 $('#answer').click(function() {
 	$('#error').css({'display':'none'});
 });
+
+
+
+//通过tab键完成input的方位操作
+function alertKey(formName) {
+	var focus = document.activeElement;//返回当前获取到焦点的元素
+	if(!formName.contains(focus)) return;
+	var event = window.event||event;
+	var key = event.keyCode;
+	for (var i= 0, len = formInput.length; i<len; i++) {
+		if (formInput[i]===focus) {
+			break;
+		}
+	}
+	switch(key) {
+		case 38:
+			if(i>0) formInput[i-1].focus();
+			break;
+		case 40:
+			if(i<formInput.length-1) formInput[i+1].focus();
+			break;
+	}
+}
+
+/*$('.box').keydown(alertKey);*/
+
 //弹出新建队列的表单
 $('#new').click(function() {
 	$('#addForm').css({'display':'block'});
 });
+
+$('#addForm').on({
+	keyup: function() {
+		if(event.keyCode == 13) {//通过enter键来提交
+			$('#addForm').css({'display':'none'});
+			insertRow(tbody.rows.length);
+		}
+	},
+	keydown: function() {
+		var formName = document.getElementById('addForm');
+		alertKey(formName);
+	}
+});
+
+
 //添加
 $('#add').click(function() {
 	$('#addForm').css({'display':'none'});
 	insertRow(tbody.rows.length);
 	save();
-	console.log(dataInfo);
 });
+
 //取消
 $('#cancel').click(function() {
 	$('#addForm').css({'display':'none'});
@@ -157,6 +171,8 @@ $('#check').click(function() {
 $('#close').click(function() {
 	$('#infoForm').css({'display':'none'});
 });
+
+
 /* 弹出删除信息 */
 $('#delete').click(function() {
 	$(menu).toggle();
@@ -189,6 +205,23 @@ $('#change').click(function() {
 	for (var i = 0; i <= 4; i++) {
 		changeForm.elements[i].value = table.rows[currentIndex].cells[i+1].innerText;
 	}
+
+});
+
+$('#changeForm').on({
+	keyup: function() {
+		if(event.keyCode == 13) {//通过enter键来提交
+			$('#changeForm').css({'display':'none'});
+			var changeForm = document.getElementById('changeForm');
+			for (var i = 0; i <= 4; i++) {
+				table.rows[currentIndex].cells[i+1].innerText = changeForm.elements[i].value;
+			}
+		}
+	},
+	keydown: function() {
+		var formName = document.getElementById('changeForm');
+		alertKey(formName);
+	}
 });
 
 $('#save2,.cancel').click(function() {
@@ -199,10 +232,54 @@ $('#save2').click(function() {
 	for (var i = 0; i <= 4; i++) {
 		table.rows[currentIndex].cells[i+1].innerText = changeForm.elements[i].value;
 	}
-	save();
-	console.log(dataInfo);
 });
 
+
+//保存数据
+var dataInfo = new Array();
+/*if (!localStorage.getItem('dataInfo')) {
+	initStorage();
+} else {
+	setStorage();
+}*/
+function save() {
+	for (var i=0, len=tbody.rows.length; i<len; i++) {
+		for (var n=1; n<=5; n++) {
+			var elementArray = tbody.rows[i].cells[n].innerText;
+			dataInfo.push(elementArray);
+		}
+	}
+	localStorage.setItem('dataInfo',dataInfo);
+}
+/*function save() {
+	if (!localStorage.getItem('dataInfo')) {
+		save();
+	} else {
+		setStorage();
+	}
+	dataInfo.onchange = setStorage();
+}
+function init() {
+	for (var i=0, len=tbody.rows.length; i<len; i++) {
+		for (var n=1; n<=5; n++) {
+			var elementArray = tbody.rows[i].cells[n].innerText;
+			dataInfo.push(elementArray);
+		}
+	}
+	localStorage.setItem('dataInfo',dataInfo);
+	setStorage();
+}
+//将缓存中的数据呈现出来
+function setStorage() {
+
+	currentDataInfo = localStorage.getItem('dataInfo');
+	for (var i= 0, len=tbody.rows.length; i<len; i++) {
+		for (var n=1; n<=5; n++) {
+			var currentElementArray = tbody.rows[i].cells[n].innerText;
+			currentDataInfo.push(currentElementArray);
+		}
+	}
+}*/
 
 
 

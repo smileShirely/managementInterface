@@ -56,7 +56,7 @@
             <tbody id="tBody">
                 <tr>
                     <td><input  type="checkbox" name="checks"  onclick="getChecked()"></td>
-                    <td id="test">cmy</td>
+                    <td>cmy</td>
                     <td>4</td>
                     <td>6</td>
                     <td>6</td>
@@ -94,19 +94,19 @@
 <form name="addForm"  id="addForm" class="box">
     <h2>新建队列</h2>
     <label for="myCell1">名称：</label>
-    <input type="text" id="myCell1" name="myCell1"/><br/>
+    <input tabindex="1" type="text" id="myCell1" name="myCell1"/><br/>
 
     <label for="myCell2">信息总数：</label>
-    <input type="text" id="myCell2" name="myCell2"/><br/>
+    <input tabindex="2" type="text" id="myCell2" name="myCell2"/><br/>
 
     <label for="myCell3">传输中的消息:</label>
-    <input type="text" id="myCell3" name="myCell3" /><br/>
+    <input tabindex="3" type="text" id="myCell3" name="myCell3" /><br/>
 
     <label for="myCell4">可用信息:</label>
-    <input type="text" id="myCell4" name="myCell4"/><br/>
+    <input tabindex="4" type="text" id="myCell4" name="myCell4"/><br/>
 
     <label for="myCell5">创建的时间:</label>
-    <input type="text" id="myCell5" name="myCell5"/><br/>
+    <input tabindex="5" type="text" id="myCell5" name="myCell5"/><br/>
 
     <input id="cancel" class="sub btn cancel" type="button" value="取消">
     <input id="add" class="sub btn" type="button" value="添加"/>
@@ -210,6 +210,7 @@
     }
 </script>
 <script src="js/jquery.min.js"></script>
+<script src="js/EventUtil.js"></script>
 <script src="js/bootstrap-table.js"></script>
 <script src="js/main.js"></script>
 <script src="js/form.js"></script>
