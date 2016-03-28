@@ -1,0 +1,1 @@
+/** * Created by cmy on 2016/3/28. *//*$(function() {	$('.main').onepage_srcoll({		sectionContainer: "section",		easing: "cubic-bezier(0.175, 0.885, 0.420, 1.310)"	});});*/
