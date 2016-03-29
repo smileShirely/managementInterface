@@ -1,6 +1,8 @@
 # managementInterface
 模拟服务系统的管理界面展示
-
+正在完善的首页 <a href="http://7xs1wr.com1.z0.glb.clouddn.com/managementInterface/index_test.html">index_test</a>
+目前是点击登录就能进入用户管理界面
+直接进入用户管理界面 <a href="http://7xs1wr.com1.z0.glb.clouddn.com/managementInterface/userInterface.html">userInterface</a>
 ## 实现的功能
 + 能够对表格进行增删查改
 + 点击复选框可以在数据统计图里出现线段
@@ -15,3 +17,4 @@
 + 表格：bootstrap-table
 + 图表：ECharts
 + Jquery
++ Bootstrap
